@@ -1,0 +1,3 @@
+#clerk credentials
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_aG9uZXN0LWxhZHliaXJkLTgyLmNsZXJrLmFjY291bnRzLmRldiQ
+CLERK_SECRET_KEY=sk_test_O8qt206jh6maX4yYBRBmSedner6c2zQKbNot0OeqKr

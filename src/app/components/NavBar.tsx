@@ -1,17 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import React from "react";
 import ModeToggle from "./ModeToggle";
-import {
-  Popover,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTitle,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Separator } from "@/components/ui/separator";
+
 import {
   SignedIn,
   SignedOut,
@@ -19,13 +11,12 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
+
+import Link from "next/link";
 
 const NavBar = async () => {
-  const menus = ["Home", "Profile", "Dashboard"];
-  const signInStatus = false;
-  const session = await auth();
-  console.log("session", session);
+  const menus = ["home", "profile", "dashboard"];
+
   return (
     <div className="min-w-screen border-b-2 shadow-lg flex justify-between items-center">
       <div className="left ">
@@ -43,12 +34,13 @@ const NavBar = async () => {
         <div className="flex justify-between  items-center gap-5 px-3 ">
           <ul className="flex justify-center items-center gap-2 text-xl font-semibold">
             {menus.map((menu, key) => (
-              <li
+              <Link
+                href={`/${menu}`}
                 key={key}
-                className="cursor-pointer hover:text-slate-600 hover:underline  transition-all ease-in-out duration-300"
+                className="cursor-pointer hover:text-slate-600 hover:underline  transition-all ease-in-out duration-300 capitalize"
               >
-                {menu}
-              </li>
+                <li>{menu}</li>
+              </Link>
             ))}
           </ul>
 
@@ -57,7 +49,9 @@ const NavBar = async () => {
           <div className="space-x-2 flex justify-between items-center my-3">
             {/* Show the sign-in and sign-up buttons when the user is signed out */}
             <SignedOut>
-              <SignInButton />
+              <SignInButton>
+                <Button variant="outline">SignIn</Button>
+              </SignInButton>
               <SignUpButton>
                 <Button>Sign Up</Button>
               </SignUpButton>
@@ -73,30 +67,4 @@ const NavBar = async () => {
   );
 };
 
-const PopoverMenu = () => {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Avatar className="cursor-pointer">
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      </PopoverTrigger>
-      <PopoverContent>
-        <PopoverHeader>
-          <PopoverTitle>UserName here</PopoverTitle>
-          <ul className="ml-3 text-lg font-semibold">
-            <li>Profile settings</li>
-            <li>Change password</li>
-            <li>Profile settings</li>
-          </ul>
-        </PopoverHeader>
-        <Separator className="my-3" />
-        <div className="space-x-1 my-3">
-          <Button>SignOut</Button>
-        </div>
-      </PopoverContent>
-    </Popover>
-  );
-};
 export default NavBar;
