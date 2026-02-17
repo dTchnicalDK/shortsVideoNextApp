@@ -8,3 +8,7 @@ CLERK_SECRET_KEY=sk_test_O8qt206jh6maX4yYBRBmSedner6c2zQKbNot0OeqKr
 # neon db setup
 DATABASE_URL='postgresql://neondb_owner:npg_dewxC37IPpWY@ep-muddy-cherry-a1f469g7-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
 # psql 'postgresql://neondb_owner:npg_qpsDH2AgI4ON@ep-billowing-feather-a1tl3eeu-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+
+# imgekit io setup
+IMAGEKIT_PUBLIC_KEY=public_xmDcq6odGIxW8vuaHWb7Ah2sHyo=
+IMAGEKIT_PRIVATE_KEY=private_5jRxuBWnIrrvCCCjVSeuoPc9uCY=
