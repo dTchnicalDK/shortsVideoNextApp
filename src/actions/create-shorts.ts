@@ -10,20 +10,24 @@ const uploadShortsSchema = z.object({
 
 type UploadShortsState = {
   errors: {
-    title?: string[];
+    title?: string[] | undefined;
     description?: string[];
     video?: string[];
     formError?: string[];
   };
 };
-const createShorts = async (formData: FormData) => {
+export const createShorts = async (
+  previousState: UploadShortsState,
+  formData: FormData,
+): Promise<UploadShortsState> => {
   const parsedFormData = uploadShortsSchema.safeParse({
     title: formData.get("title") as string,
     description: formData.get("description") as string,
     video: formData.get("video") as string,
   });
+  console.log("parsedFormData", parsedFormData);
   if (!parsedFormData.success) {
-    return { error: parsedFormData.error.flatten().fieldErrors };
+    return { errors: parsedFormData.error.flatten().fieldErrors };
   }
 
   //checking is userLogged in or not
@@ -31,8 +35,9 @@ const createShorts = async (formData: FormData) => {
   console.log("userid", userId);
   if (!userId) {
     return {
-      error: { formError: ["please login first! "] },
+      errors: { formError: ["please login first! "] },
     };
   }
-  console.log("working...");
+  console.log("working...good to go further...");
+  return { errors: {} };
 };

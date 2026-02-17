@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
 import React from "react";
 import ModeToggle from "./ModeToggle";
-
 import {
   SignedIn,
   SignedOut,
@@ -11,7 +9,6 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
-
 import Link from "next/link";
 
 const NavBar = async () => {
@@ -20,10 +17,11 @@ const NavBar = async () => {
   return (
     <div className="min-w-screen border-b-2 shadow-lg flex justify-between items-center">
       <div className="left ">
-        <h1 className="text-2xl font-serif font-bold px-5 py-3">
-          D
-          <span className="text-lime-500 dark:text-slate-400">shorTs</span>{" "}
-        </h1>
+        <Link href="/">
+          <h1 className="text-2xl font-serif font-bold px-5 py-3">
+            D<span className="text-lime-500 dark:text-slate-400">shorTs</span>
+          </h1>
+        </Link>
       </div>
 
       <div className="center w-sm ">
@@ -35,7 +33,7 @@ const NavBar = async () => {
           <ul className="flex justify-center items-center gap-2 text-xl font-semibold">
             {menus.map((menu, key) => (
               <Link
-                href={`/${menu}`}
+                href={`/${menu === "home" ? "" : menu}`}
                 key={key}
                 className="cursor-pointer hover:text-slate-600 hover:underline  transition-all ease-in-out duration-300 capitalize"
               >
@@ -50,7 +48,9 @@ const NavBar = async () => {
             {/* Show the sign-in and sign-up buttons when the user is signed out */}
             <SignedOut>
               <SignInButton>
-                <Button variant="outline">SignIn</Button>
+                <Button variant="outline" className="cursor-pointer">
+                  SignIn
+                </Button>
               </SignInButton>
               <SignUpButton>
                 <Button>Sign Up</Button>
