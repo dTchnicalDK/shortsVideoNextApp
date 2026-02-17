@@ -1,5 +1,7 @@
 "use client"; // This component must be a client component
 
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import {
   ImageKitAbortError,
   ImageKitInvalidRequestError,
@@ -7,6 +9,7 @@ import {
   ImageKitUploadNetworkError,
   upload,
 } from "@imagekit/next";
+import { UploadCloudIcon } from "lucide-react";
 import { useRef, useState } from "react";
 
 type UploadVideoProps = {
@@ -126,20 +129,28 @@ const Upload = ({ setVideoUrl }: UploadVideoProps) => {
   };
 
   return (
-    <>
+    <div className="container flex flex-col space-y-2 ">
       {/* File input element using React ref */}
-      <input type="file" ref={fileInputRef} />
-      {/* Button to trigger the upload process */}
-      <button type="button" onClick={handleUpload}>
-        Upload file
-      </button>
-      <br />
+      <div className=" w-full flex  justify-between items-center">
+        <input
+          type="file"
+          ref={fileInputRef}
+          className="ring ring-gray-600 rounded-xl  w-1/2 p-2"
+        />
+        {/* Button to trigger the upload process */}
+
+        <Button variant="outline" type="button" onClick={handleUpload}>
+          <UploadCloudIcon />
+          <span>Upload file</span>
+        </Button>
+      </div>
+
       {/* Display the current upload progress */}
-      Upload progress:{" "}
-      <progress value={progress} max={100}>
-        {progress.toString()}
-      </progress>
-    </>
+      <div className="flex flex-col gap-2">
+        Upload progress:
+        <Progress value={progress} />
+      </div>
+    </div>
   );
 };
 

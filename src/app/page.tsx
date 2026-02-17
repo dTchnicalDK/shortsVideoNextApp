@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import ShortsCard from "./components/shorts/shorts-card";
 
 export default async function Home() {
   const user = await currentUser();
@@ -22,10 +23,16 @@ export default async function Home() {
       },
     });
   }
+
+  const allShortsOfUser = await prisma.shorts.findMany({
+    where: { userId: loggedInUser?.id },
+    include: { user: { select: { clerkUserId: true, email: true } } },
+  });
+  // console.log("shorts", AllShortsOfUser);
   if (user) {
-    const { firstName, lastName, emailAddresses } = user;
+    const { firstName, lastName, emailAddresses, id } = user;
     return (
-      <div className="flex justify-between p-5 ">
+      <div className="flex flex-col justify-between p-5 gap-5 snap-start">
         <div>
           firstName: {firstName} lastName: {lastName} email:{" "}
           {emailAddresses[0].emailAddress}
@@ -37,6 +44,11 @@ export default async function Home() {
             </Button>
           </Link>
         </div>
+
+        {allShortsOfUser.length > 0 &&
+          allShortsOfUser.map((short) => (
+            <ShortsCard key={short.id} short={short} />
+          ))}
       </div>
     );
   }

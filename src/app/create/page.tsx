@@ -15,14 +15,17 @@ const CreateShort = () => {
 
   console.log("formstate on client", formState);
   return (
-    <div className="container flex justify-center items-center p-5 ">
+    <div className="container flex justify-center items-center p-5 py-8">
       <form
         action={(formData: FormData) => {
           formData.append("video", videoUrl);
           action(formData);
         }}
-        className="w-1/2 space-y-5"
+        className="w-3/4 max-w-lg md:h-1/2  space-y-5"
       >
+        <h1 className="text-center font-semibold text-xl font-mono">
+          Upload Your Shorts Here!{" "}
+        </h1>
         <div className="space-y-2">
           <Label>Title</Label>
           <Input type="text" name="title" />
@@ -41,28 +44,6 @@ const CreateShort = () => {
             </p>
           )}
         </div>
-        {/* <div className="space-y-2">
-          <Label>Upload File</Label>
-          <Input
-            type="file"
-            // name="video"
-            className="cursor-pointer"
-            onChange={() => {
-              setVideoUrl("dummy videoUrl");
-            }}
-          />
-          {formState.errors.video && (
-            <p className="text-red-500 text-sm dark:text-red-300">
-              {formState.errors.video}
-            </p>
-          )}
-        </div>
-
-        {formState.errors.formError && (
-          <div className="p-4 bg-red-50 text-red-500 rounded-lg">
-            <p>{formState.errors.formError}</p>{" "}
-          </div>
-        )} */}
 
         <Upload setVideoUrl={setVideoUrl} />
 
