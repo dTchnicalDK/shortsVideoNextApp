@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { useActionState, useState } from "react";
+import Upload from "../components/Upload";
+// import Upload from "../components/Upload";
 
 const CreateShort = () => {
-  const [videoUrl, setVideoUrl] = useState("");
+  const [videoUrl, setVideoUrl] = useState<string>("");
   const [formState, action, pending] = useActionState(createShorts, {
     errors: {},
   });
@@ -39,7 +41,7 @@ const CreateShort = () => {
             </p>
           )}
         </div>
-        <div className="space-y-2">
+        {/* <div className="space-y-2">
           <Label>Upload File</Label>
           <Input
             type="file"
@@ -60,7 +62,9 @@ const CreateShort = () => {
           <div className="p-4 bg-red-50 text-red-500 rounded-lg">
             <p>{formState.errors.formError}</p>{" "}
           </div>
-        )}
+        )} */}
+
+        <Upload setVideoUrl={setVideoUrl} />
 
         <Button type="submit" className="w-full" disabled={pending}>
           {pending ? "sending..." : "Upload Video"}
