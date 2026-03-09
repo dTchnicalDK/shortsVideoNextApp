@@ -3,11 +3,10 @@ import { prisma } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import ShortsCard from "./components/shorts/shorts-card";
+import FeedScroller from "./components/feed/FeedScroller";
 
 export default async function Home() {
   const user = await currentUser();
-  // console.log("=====", user);
   if (!user) {
     return null;
   }
@@ -28,11 +27,11 @@ export default async function Home() {
     where: { userId: loggedInUser?.id },
     include: { user: { select: { clerkUserId: true, email: true } } },
   });
-  // console.log("shorts", AllShortsOfUser);
+
   if (user) {
     const { firstName, lastName, emailAddresses, id } = user;
     return (
-      <div className="flex flex-col justify-between p-5 gap-5 snap-start">
+      <div>
         <div>
           firstName: {firstName} lastName: {lastName} email:{" "}
           {emailAddresses[0].emailAddress}
@@ -45,10 +44,9 @@ export default async function Home() {
           </Link>
         </div>
 
-        {allShortsOfUser.length > 0 &&
-          allShortsOfUser.map((short) => (
-            <ShortsCard key={short.id} short={short} />
-          ))}
+        <div className="max-w-screen">
+          <FeedScroller shorts={allShortsOfUser} />
+        </div>
       </div>
     );
   }
