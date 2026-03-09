@@ -27,7 +27,7 @@ export default async function Home() {
     where: { userId: loggedInUser?.id },
     include: { user: { select: { clerkUserId: true, email: true } } },
   });
-
+  // console.log("shorts:", allShortsOfUser);
   if (user) {
     const { firstName, lastName, emailAddresses, id } = user;
     return (

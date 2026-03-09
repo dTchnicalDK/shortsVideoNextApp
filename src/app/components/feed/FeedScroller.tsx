@@ -33,12 +33,11 @@ export default function FeedScroller({ shorts }: FeedScrollerProps) {
       document.removeEventListener("click", handleFirstInteraction);
       document.removeEventListener("touchstart", handleFirstInteraction);
       document.removeEventListener("keydown", handleFirstInteraction);
-      document.removeEventListener("scroll", handleFirstInteraction);
+      //   document.removeEventListener("scroll", handleFirstInteraction);
     };
     document.addEventListener("click", handleFirstInteraction);
     document.addEventListener("touchstart", handleFirstInteraction);
     document.addEventListener("keydown", handleFirstInteraction);
-    document.removeEventListener("scroll", handleFirstInteraction);
 
     // Cleanup function
     return () => {

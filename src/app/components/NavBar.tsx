@@ -15,7 +15,7 @@ const NavBar = async () => {
   const menus = ["home", "profile", "dashboard"];
 
   return (
-    <div className="min-w-screen border-b-2 shadow-lg flex justify-between items-center">
+    <div className="min-w-full border-b-2 shadow-lg flex justify-between items-center">
       <div className="left ">
         <Link href="/">
           <h1 className="text-2xl font-serif font-bold px-5 py-3">
