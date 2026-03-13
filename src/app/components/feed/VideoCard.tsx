@@ -83,7 +83,7 @@ export default function VideoCard({
         vid.pause();
       }
     };
-  }, [isMuted, hasUserInteracted]); // Added isMuted to dependencies
+  }, [isMuted, hasUserInteracted]);
 
   return (
     <div className="relative h-screen w-full snap-start flex items-center justify-center">
@@ -92,8 +92,7 @@ export default function VideoCard({
         src={video.url}
         className="absolute h-full w-full object-cover"
         playsInline
-        loop
-        // Remove muted prop from here - we control it via ref in useEffect
+        // loop
       />
 
       {/* overlay */}
